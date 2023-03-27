@@ -12,13 +12,17 @@ const App: React.FunctionComponent = () => {
       id: newId,
       text,
     };
-    const newTodoList = [...todos, newTodo];
-    setTodos(newTodoList);
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
+
+  const todoDeleteHandler = (id: number) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <div className="App">
-      <NewTodo handler={todoAppHandler} />
-      <TodoList items={todos} />
+      <NewTodo addHandler={todoAppHandler} />
+      <TodoList items={todos} deleteHandler={todoDeleteHandler} />
     </div>
   );
 };

@@ -1,20 +1,21 @@
 import React, { useRef } from "react";
+import "./NewTodo.css";
 
 type NewTodoProps = {
-  handler: (todoText: string) => void;
+  addHandler: (todoText: string) => void;
 };
 
-const NewTodo: React.FC<NewTodoProps> = ({ handler }) => {
+const NewTodo: React.FC<NewTodoProps> = ({ addHandler }) => {
   const textInputRef = useRef<HTMLInputElement>(null);
   const todoSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
-    handler(enteredText);
+    addHandler(enteredText);
   };
 
   return (
     <form onSubmit={todoSubmitHandler}>
-      <div>
+      <div className="form-control">
         <label htmlFor="todo-text">Todo Text</label>
         <input type="text" id="todo-text" ref={textInputRef} />
       </div>
